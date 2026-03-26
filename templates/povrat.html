@@ -1,0 +1,34 @@
+<h2>Povrat knjige</h2>
+<form method="post">
+    <label for="idPosudba">Odaberi posudbu:</label>
+    <select name="idPosudba" required>
+        {% for p in posudbe %}
+        <option value="{{ p.idPosudba }}">{{ p.knjiga }} - {{ p.ime_prezime }}</option>
+        {% endfor %}
+    </select>
+    <label for="datum_vracanja">Datum vraćanja:</label>
+    <input type="date" name="datum_vracanja" required>
+    <button type="submit">Vrati knjigu</button>
+</form>
+
+<hr>
+
+<h2>Aktivne zakasnine</h2>
+<table border="1">
+    <tr>
+        <th>Član</th>
+        <th>Knjiga</th>
+        <th>Akcija</th>
+    </tr>
+    {% for z in zakasnine %}
+    <tr>
+        <td>{{ z.ime_prezime }}</td>
+        <td>{{ z.knjiga }}</td>
+        <td>
+            <form action="/obrisi_zakasninu/{{ z.idZakasnina }}" method="post">
+                <button type="submit">Označi kao plaćeno / Obriši</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>

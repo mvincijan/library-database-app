@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Posudbe i Zakasnine</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5">
+    <h2>Pretraga posudbi po članu</h2>
+
+    <!-- Korak 1: Unos ID-a člana -->
+    <form method="post" class="mb-4">
+        <div class="mb-3">
+            <label for="clan_id" class="form-label">Unesite ID člana:</label>
+            <input type="number" class="form-control" name="clan_id" id="clan_id" required
+                   value="{{ clan_id if clan_id else '' }}">
+        </div>
+        <button type="submit" name="prikazi_posudbe" class="btn btn-primary">Prikaži posudbe</button>
+    </form>
+
+    {% if posudbe %}
+    <!-- Korak 2: Prikaz posudbi -->
+    <h3>Aktivne posudbe</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID Posudbe</th>
+                <th>Knjiga</th>
+                <th>Datum posudbe</th>
+                <th>Rok vraćanja</th>
+                <th>Akcije</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for posudba in posudbe %}
+            <tr>
+                <td>{{ posudba.idPosudba }}</td>
+                <td>{{ posudba.knjiga }}</td>
+                <td>{{ posudba.datum_posudbe }}</td>
+                <td>{{ posudba.rok_vracanja }}</td>
+                <td>
+                    <!-- Produži rok -->
+                    <a href="/produzi_rok/{{ posudba.idPosudba }}" class="btn btn-warning btn-sm mb-1">Produži rok</a>
+
+                    <!-- Označi kao vraćeno -->
+                    <form method="post" style="display:inline;">
+                        <input type="hidden" name="idPosudba" value="{{ posudba.idPosudba }}">
+                        <input type="hidden" name="clan_id" value="{{ clan_id }}">
+                        <input type="date" name="datum_vracanja" required class="form-control form-control-sm mb-1">
+                        <button type="submit" name="vrati_posudbu" class="btn btn-success btn-sm">Vrati knjigu</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+    {% if zakasnine %}
+    <!-- Korak 3: Prikaz zakasnina -->
+    <h3>Zakasnine</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID Zakasnine</th>
+                <th>ID Posudbe</th>
+                <th>Akcija</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for zakasnina in zakasnine %}
+            <tr>
+                <td>{{ zakasnina.idZakasnina }}</td>
+                <td>{{ zakasnina.Posudba_idPosudba }}</td>
+                <td>
+                    <form method="post" action="/obrisi_zakasninu/{{ zakasnina.idZakasnina }}">
+                        <button type="submit" class="btn btn-danger btn-sm">Obriši zakasninu</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nova posudba</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Dodavanje nove posudbe</h4>
+        </div>
+        <div class="card-body">
+            <form method="post" class="row g-3">
+                
+                <div class="col-md-6">
+                    <label for="datum_posudbe" class="form-label">Datum posudbe</label>
+                    <input type="date" class="form-control" id="datum_posudbe" name="datum_posudbe" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="rok_vracanja" class="form-label">Rok vraćanja</label>
+                    <input type="date" class="form-control" id="rok_vracanja" name="rok_vracanja" required>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="primjerak" class="form-label">Primjerak</label>
+                    <input type="number" class="form-control" id="primjerak" name="primjerak" required>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="clan" class="form-label">Član</label>
+                    <input type="number" class="form-control" id="clan" name="clan" required>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="zaposlenik" class="form-label">Zaposlenik</label>
+                    <input type="number" class="form-control" id="zaposlenik" name="zaposlenik" required>
+                </div>
+
+                <div class="col-12 text-end">
+                    <button type="submit" class="btn btn-success">Spremi posudbu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<h2>Zakasnine</h2>
+<table border="1">
+    <tr>
+        <th>Clan</th>
+        <th>Knjiga</th>
+        <th>Akcija</th>
+    </tr>
+    {% for z in zakasnine %}
+    <tr>
+        <td>{{ z.ime_prezime }}</td>
+        <td>{{ z.knjiga }}</td>
+        <td>
+            <form action="/obrisi_zakasninu/{{ z.idZakasnina }}" method="post">
+                <button type="submit">Označi kao plaćeno / Obriši</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
